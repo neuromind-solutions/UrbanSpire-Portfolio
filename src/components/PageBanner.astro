@@ -43,10 +43,10 @@ const {
   <!-- Green accent line at bottom -->
   <div class="absolute bottom-0 left-0 w-full h-[3px] bg-[#5ba646] z-10"></div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-20 md:pt-44 md:pb-28">
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-14 sm:pt-36 sm:pb-20 md:pt-44 md:pb-28">
     <div class="max-w-4xl">
       <!-- Breadcrumb nav -->
-      <nav class="flex items-center space-x-2 text-xs uppercase tracking-wider text-white/60 mb-5 font-medium" aria-label="Breadcrumb">
+      <nav class="flex items-center space-x-2 text-xs uppercase tracking-wider text-white/60 mb-4 sm:mb-5 font-medium" aria-label="Breadcrumb">
         <a href="/" class="hover:text-[#5ba646] transition-colors">Home</a>
         <span class="text-white/40">/</span>
         
@@ -65,13 +65,13 @@ const {
       </nav>
 
       <!-- Page Heading -->
-      <h1 class="text-4xl sm:text-5xl lg:text-[52px] font-normal text-white leading-tight mb-5">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-normal text-white leading-tight mb-4 sm:mb-5">
         {title}
       </h1>
 
       <!-- Optional Subtitle -->
       {subtitle && (
-        <p class="text-base sm:text-lg text-white/75 font-light leading-relaxed max-w-2xl mb-6">
+        <p class="text-sm sm:text-base md:text-lg text-white/80 font-light leading-relaxed max-w-2xl mb-6">
           {subtitle}
         </p>
       )}

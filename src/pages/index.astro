@@ -147,13 +147,71 @@ const otherProjects = projects.filter((p) => p.isFeatured).slice(0, 2);
     </div>
   </section>
 
-  <!-- 3. Sectors Showcase Grid -->
+  <!-- 3. Sectors Showcase Grid & Mobile Carousel -->
   <section class="wrapper pb-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {sectors.map((sector) => (
-          <SectorCard sector={sector} />
+      <!-- Carousel Track: Horizontal Swipe on Mobile (<640px), 2-3 Column Grid on Desktop -->
+      <div
+        id="sectors-carousel"
+        class="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 pb-2 sm:pb-0 px-4 sm:px-0 -mx-4 sm:mx-0 snap-x snap-mandatory scrollbar-none scroll-smooth"
+      >
+        {sectors.map((sector, index) => (
+          <div
+            class="w-[82vw] max-w-[320px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink sector-carousel-item"
+            data-index={index}
+          >
+            <SectorCard sector={sector} />
+          </div>
         ))}
+      </div>
+
+      <!-- Mobile Carousel Navigation & Pagination Dots (Mobile Only) -->
+      <div class="sm:hidden mt-4 flex items-center justify-between px-1">
+        <!-- Swipe Prompt -->
+        <div class="flex items-center gap-1.5 text-xs font-medium text-[#60697b]">
+          <svg class="w-4 h-4 text-[#5ba646] animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+          <span>Swipe to explore</span>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="flex items-center gap-1.5" id="sectors-dots">
+          {sectors.map((_, i) => (
+            <button
+              type="button"
+              class={`sector-dot h-2 rounded-full transition-all duration-300 ${
+                i === 0 ? 'w-6 bg-[#5ba646]' : 'w-2 bg-gray-300'
+              }`}
+              data-target={i}
+              aria-label={`Go to sector ${i + 1}`}
+            ></button>
+          ))}
+        </div>
+
+        <!-- Prev / Next Micro Buttons -->
+        <div class="flex items-center gap-1.5">
+          <button
+            type="button"
+            id="sectors-prev-btn"
+            class="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#18355f] hover:text-white text-[#18355f] flex items-center justify-center transition-colors shadow-xs active:scale-95"
+            aria-label="Previous sector"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="sectors-next-btn"
+            class="w-8 h-8 rounded-full bg-gray-100 hover:bg-[#18355f] hover:text-white text-[#18355f] flex items-center justify-center transition-colors shadow-xs active:scale-95"
+            aria-label="Next sector"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -173,7 +231,7 @@ const otherProjects = projects.filter((p) => p.isFeatured).slice(0, 2);
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {companies.map((company) => (
           <CompanyCard company={company} />
         ))}
@@ -388,10 +446,67 @@ const otherProjects = projects.filter((p) => p.isFeatured).slice(0, 2);
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCounters);
-  } else {
-    initCounters();
+  function initSectorsCarousel() {
+    const carousel = document.getElementById('sectors-carousel');
+    const dots = document.querySelectorAll<HTMLButtonElement>('.sector-dot');
+    const prevBtn = document.getElementById('sectors-prev-btn');
+    const nextBtn = document.getElementById('sectors-next-btn');
+    const items = document.querySelectorAll<HTMLElement>('.sector-carousel-item');
+
+    if (!carousel || items.length === 0) return;
+
+    function updateActiveDot() {
+      if (window.innerWidth >= 640) return;
+      const scrollLeft = carousel.scrollLeft;
+      const itemWidth = items[0].offsetWidth;
+      const activeIndex = Math.min(
+        Math.max(0, Math.round(scrollLeft / (itemWidth + 16))),
+        dots.length - 1
+      );
+
+      dots.forEach((dot, idx) => {
+        if (idx === activeIndex) {
+          dot.classList.remove('w-2', 'bg-gray-300');
+          dot.classList.add('w-6', 'bg-[#5ba646]');
+        } else {
+          dot.classList.remove('w-6', 'bg-[#5ba646]');
+          dot.classList.add('w-2', 'bg-gray-300');
+        }
+      });
+    }
+
+    carousel.addEventListener('scroll', updateActiveDot, { passive: true });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const targetIndex = Number(dot.getAttribute('data-target') || 0);
+        const targetItem = items[targetIndex];
+        if (targetItem) {
+          targetItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      const itemWidth = items[0].offsetWidth + 16;
+      carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      const itemWidth = items[0].offsetWidth + 16;
+      carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+    });
   }
-  document.addEventListener('astro:page-load', initCounters);
+
+  function initAll() {
+    initCounters();
+    initSectorsCarousel();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+  document.addEventListener('astro:page-load', initAll);
 </script>

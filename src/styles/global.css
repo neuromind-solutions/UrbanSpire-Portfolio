@@ -146,17 +146,50 @@ h4.tp-ttls.lns-c::before {
 .cntsc-sld {
   position: absolute;
   z-index: 2;
-  width: 45%;
+  width: 48%;
   left: 9%;
   top: 50%;
   transform: translateY(-50%);
   padding: 0;
 }
 
+@media (max-width: 1200px) {
+  .cntsc-sld {
+    width: 60%;
+    left: 8%;
+  }
+}
+
 @media (max-width: 991px) {
   .cntsc-sld {
-    width: 85%;
+    width: 82%;
     left: 7%;
+  }
+  .cntsc-sld h2 {
+    font-size: 34px;
+    line-height: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .insblsx, .carousel-cell {
+    height: 100svh;
+    min-height: 520px;
+  }
+  .cntsc-sld {
+    width: 92%;
+    left: 4%;
+    top: 42%;
+    transform: translateY(-50%);
+  }
+  .cntsc-sld h2 {
+    font-size: 26px !important;
+    line-height: 33px !important;
+  }
+  .cntsc-sld p {
+    font-size: 13.5px !important;
+    line-height: 20px !important;
+    margin-bottom: 1.25rem !important;
   }
 }
 
@@ -169,26 +202,12 @@ h4.tp-ttls.lns-c::before {
   text-shadow: 0 2px 12px rgba(0,0,0,0.25);
 }
 
-@media (max-width: 991px) {
-  .cntsc-sld h2 {
-    font-size: 28px;
-    line-height: 34px;
-  }
-}
-
 .cntsc-sld p {
   font-size: 18px;
   font-weight: 300;
   color: #ffffff;
   line-height: 28px;
   margin-bottom: 1.5rem;
-}
-
-@media (max-width: 991px) {
-  .cntsc-sld p {
-    font-size: 15px;
-    line-height: 22px;
-  }
 }
 
 .cntsc-sld a.sld-btn {
@@ -236,6 +255,33 @@ h4.tp-ttls.lns-c::before {
   color: #ffffff;
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nmsx {
+    right: 4% !important;
+    bottom: 5% !important;
+  }
+  .lftsx h3 {
+    font-size: 12.5px !important;
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cntrbx {
+    margin-left: 0.75rem !important;
+    padding-left: 18px !important;
+    font-size: 13px !important;
+  }
+  .cntrbx::before {
+    width: 12px !important;
+  }
+  .hero-next-btn {
+    width: 38px !important;
+    height: 38px !important;
+    margin-left: 0.5rem !important;
+  }
 }
 
 .lftsx h3 {
@@ -291,7 +337,6 @@ h4.tp-ttls.lns-c::before {
 }
 
 /* Overview Section */
-/* Overview Section */
 .abt-scsf {
   position: relative;
   height: 100%;
@@ -300,6 +345,12 @@ h4.tp-ttls.lns-c::before {
   overflow: hidden;
   background: #0f172a;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .abt-scsf {
+    min-height: 260px;
+  }
 }
 
 .abt-scsf img {
@@ -334,6 +385,17 @@ a.btn-prjct-slcs {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  a.btn-prjct-slcs {
+    width: 58px;
+    height: 58px;
+  }
+  a.btn-prjct-slcs svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 a.btn-prjct-slcs svg {
@@ -399,6 +461,15 @@ a.btn-prjct-slcs:hover {
   font-variant-numeric: tabular-nums;
   display: inline-flex;
   align-items: baseline;
+}
+
+@media (max-width: 640px) {
+  .ab-dtlsc h3.counter {
+    font-size: 30px;
+  }
+  .ab-dtlsc .counter-wrapper p {
+    font-size: 11px !important;
+  }
 }
 
 .ab-dtlsc .counter-wrapper p {
@@ -474,6 +545,12 @@ a.prf-btn-s:hover svg path, a.prf-btn-s:hover svg line, a.prf-btn-s:hover svg po
   display: block;
 }
 
+@media (max-width: 640px) {
+  .fncy-bxs-ctg figure.th-ctgr-sc {
+    height: 280px;
+  }
+}
+
 .fncy-bxs-ctg figure.th-ctgr-sc img {
   width: 100%;
   height: 100%;
@@ -518,6 +595,14 @@ a.prf-btn-s:hover svg path, a.prf-btn-s:hover svg line, a.prf-btn-s:hover svg po
   backdrop-filter: blur(2px);
 }
 
+@media (hover: none) or (max-width: 768px) {
+  .fncy-bxs-ctg .sector-arrow {
+    opacity: 0.85;
+    width: 44px;
+    height: 44px;
+  }
+}
+
 .fncy-bxs-ctg:hover .sector-arrow {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.08);
@@ -558,7 +643,7 @@ a.prf-btn-s:hover svg path, a.prf-btn-s:hover svg line, a.prf-btn-s:hover svg po
 
 @media (max-width: 640px) {
   .fncybx-s2 {
-    padding: 36px 20px;
+    padding: 32px 20px;
     border-radius: 40px 10px;
     min-height: 280px;
   }
@@ -695,6 +780,25 @@ a.prf-btn-s:hover svg path, a.prf-btn-s:hover svg line, a.prf-btn-s:hover svg po
   color: var(--color-primary);
   margin: 0;
   line-height: 24px;
+}
+
+@media (max-width: 640px) {
+  .icntsc-s {
+    padding: 13px 0;
+  }
+  .icntsc-s .icn-sc {
+    width: 48px;
+    height: 48px;
+    margin-right: 0.875rem;
+  }
+  .icntsc-s .icn-sc img, .icntsc-s .icn-sc svg {
+    width: 24px;
+    height: 24px;
+  }
+  .icntsc-s h4 {
+    font-size: 15px;
+    line-height: 20px;
+  }
 }
 
 /* Newly Awarded & News */
@@ -940,6 +1044,15 @@ a.dwns-c {
   transition: all 200ms linear;
 }
 
+@media (max-width: 640px) {
+  a.dwns-c {
+    right: 1rem;
+    bottom: 1rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
 a.dwns-c:hover {
   background: var(--color-secondary);
   color: #ffffff;
@@ -967,4 +1080,18 @@ nav.asch-hd #navbar-hamburger-btn {
 
 nav.asch-hd #navbar-hamburger-btn:hover {
   color: var(--color-secondary, #5ba646) !important;
+}
+
+/* Scrollbar Hiding Utility */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

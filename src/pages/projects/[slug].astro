@@ -89,7 +89,7 @@ const executingCompany = companies.find((c) => c.id === project.companyId);
           )}
 
           <!-- Navigation Back Links -->
-          <div class="mt-12 pt-8 border-t border-[#e2e4e8] flex items-center justify-between">
+          <div class="mt-12 pt-8 border-t border-[#e2e4e8] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <a
               href="/projects"
               class="inline-flex items-center gap-2 text-xs uppercase font-semibold tracking-wider text-[#18355f] hover:text-[#5ba646] transition-colors"
@@ -102,7 +102,7 @@ const executingCompany = companies.find((c) => c.id === project.companyId);
 
             <a
               href="/contact"
-              class="px-6 py-2.5 bg-[#5ba646] hover:bg-[#18355f] text-white text-xs uppercase font-semibold tracking-wider rounded-full transition-colors"
+              class="px-6 py-2.5 bg-[#5ba646] hover:bg-[#18355f] text-white text-xs uppercase font-semibold tracking-wider rounded-full transition-colors text-center w-full sm:w-auto"
             >
               Inquire on Similar Project
             </a>
