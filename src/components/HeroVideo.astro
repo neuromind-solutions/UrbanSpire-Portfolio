@@ -1,36 +1,31 @@
 ---
 const slides = [
   {
-    title: 'Leading construction conglomerate',
-    subtitle: 'operating across prime regional sectors for three decades.',
-    project: 'The Vertex Innovation Tower',
-    link: '/about',
+    companyTag: 'URBANSPIRE CONSTRUCTION',
+    title: 'Building Landmark Infrastructure',
+    subtitle: 'Civil infrastructure & high-rise engineering in Pune.',
+    companyName: 'Urbanspire Construction, Pune',
+    link: '/companies/urbanspire-construction-pune',
     video: 'https://assets.mixkit.co/videos/preview/mixkit-modern-city-skyscrapers-and-buildings-42668-large.mp4',
     poster: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85',
   },
   {
-    title: 'Driven by teamwork and integrity',
-    subtitle: 'utilizing the specialized expertise of our three operating companies.',
-    project: 'Azure Horizon Enclave',
-    link: '/companies',
-    video: 'https://assets.mixkit.co/videos/preview/mixkit-engineers-discussing-over-a-blueprint-41279-large.mp4',
-    poster: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=85',
+    companyTag: 'URBANSPIRE MARINE',
+    title: 'Mastering Coastal & Marine Works',
+    subtitle: 'Ports, maritime defense, and coastal civil engineering in Mumbai.',
+    companyName: 'Urbanspire Marine, Mumbai',
+    link: '/companies/urbanspire-marine-mumbai',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-waves-crashing-on-a-rocky-coast-41684-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85',
   },
   {
-    title: 'Building for tomorrow',
-    subtitle: 'by adopting advanced BIM technology and sustainable construction solutions.',
-    project: 'Grand Coastal Cruise Terminal',
-    link: '/services',
+    companyTag: 'URBANSPIRE GLOBAL SERVICE',
+    title: 'Global Project Excellence & BIM',
+    subtitle: 'International consulting and digital smart delivery from Dubai.',
+    companyName: 'Urbanspire Global Service, Dubai',
+    link: '/companies/urbanspire-global-service-dubai',
     video: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4',
-    poster: 'https://images.unsplash.com/photo-1468375741313-9c9c807f4973?auto=format&fit=crop&w=2000&q=85',
-  },
-  {
-    title: 'Delivering enduring value',
-    subtitle: 'providing clients unmatched expertise in civil engineering, procurement, and fit-outs.',
-    project: 'Aura Luxury Wellness Resort',
-    link: '/projects',
-    video: 'https://assets.mixkit.co/videos/preview/mixkit-construction-worker-on-a-building-site-22-large.mp4',
-    poster: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=85',
+    poster: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=85',
   }
 ];
 
@@ -74,20 +69,24 @@ const totalSlides = slides.length;
             />
 
             <!-- Gradient Scrim for Legibility -->
-            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent z-10 pointer-events-none"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none"></div>
 
             <!-- Slide Content (left-aligned like ASGC: left 9%, vertically centered) -->
             <div class="cntsc-sld z-20">
+              <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs font-semibold tracking-wider text-[#5ba646] uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#5ba646]"></span>
+                <span>{slide.companyTag}</span>
+              </div>
               <h2 class="text-white font-normal text-3xl sm:text-4xl lg:text-[42px] leading-tight mb-3">
                 {slide.title}
               </h2>
-              <p class="text-white/90 text-base sm:text-lg font-light leading-relaxed mb-6 max-w-md">
+              <p class="text-white/90 text-sm sm:text-base font-light leading-relaxed mb-6 max-w-md">
                 {slide.subtitle}
               </p>
               <div>
                 <a href={slide.link} class="sld-btn">
-                  Read more
+                  Discover More
                 </a>
               </div>
             </div>
@@ -95,11 +94,11 @@ const totalSlides = slides.length;
           </div>
         ))}
 
-        <!-- Shared Bottom Right: Project Callout & Counter & Arrow (single element, not per-slide) -->
+        <!-- Shared Bottom Right: Company Callout & Counter & Arrow -->
         <div class="nmsx z-30 flex items-center" id="hero-bottom-info">
           <div class="lftsx">
-            <h3 class="prcnms text-white font-medium text-sm sm:text-base" id="hero-project-name">
-              {slides[0].project}
+            <h3 class="prcnms text-white font-medium text-sm sm:text-base" id="hero-company-name">
+              {slides[0].companyName}
             </h3>
           </div>
           <div class="cntrbx">
@@ -125,16 +124,15 @@ const totalSlides = slides.length;
 
 <script>
   const slideData = [
-    { project: 'The Vertex Innovation Tower', link: '/about' },
-    { project: 'Azure Horizon Enclave', link: '/companies' },
-    { project: 'Grand Coastal Cruise Terminal', link: '/services' },
-    { project: 'Aura Luxury Wellness Resort', link: '/projects' },
+    { companyName: 'Urbanspire Construction, Pune', link: '/companies/urbanspire-construction-pune' },
+    { companyName: 'Urbanspire Marine, Mumbai', link: '/companies/urbanspire-marine-mumbai' },
+    { companyName: 'Urbanspire Global Service, Dubai', link: '/companies/urbanspire-global-service-dubai' },
   ];
 
   const slideEls = document.querySelectorAll<HTMLElement>('.hero-slide');
   const videoEls = document.querySelectorAll<HTMLVideoElement>('[data-slide-video]');
   const nextBtn = document.getElementById('hero-next-btn');
-  const projectName = document.getElementById('hero-project-name');
+  const companyNameEl = document.getElementById('hero-company-name');
   const currentNum = document.getElementById('hero-current-num');
 
   let currentIdx = 0;
@@ -163,7 +161,7 @@ const totalSlides = slides.length;
     }
 
     // Update UI
-    if (projectName) projectName.textContent = slideData[currentIdx].project;
+    if (companyNameEl) companyNameEl.textContent = slideData[currentIdx].companyName;
     if (currentNum) currentNum.textContent = String(currentIdx + 1);
   }
 
