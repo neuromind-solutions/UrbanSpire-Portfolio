@@ -1,0 +1,81 @@
+---
+import type { Company } from '../types';
+
+interface Props {
+  company: Company;
+}
+
+const { company } = Astro.props;
+---
+
+<div class="group bg-white border border-[#e4e7eb] hover:border-[#5ba646] rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+  <!-- Card Header Image -->
+  <div class="relative h-56 overflow-hidden">
+    <img
+      src={company.heroImage}
+      alt={company.name}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#18355f]/90 via-[#18355f]/40 to-transparent"></div>
+    
+    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-semibold text-[#18355f]">
+      Est. {company.established}
+    </div>
+
+    <div class="absolute bottom-4 left-5 right-5 text-white">
+      <span class="text-xs uppercase font-semibold tracking-wider text-[#5ba646] block mb-1">
+        {company.specialization}
+      </span>
+      <h3 class="font-bold text-xl text-white group-hover:text-[#5ba646] transition-colors leading-snug">
+        {company.name}
+      </h3>
+    </div>
+  </div>
+
+  <!-- Card Body -->
+  <div class="p-6 flex-grow flex flex-col justify-between bg-white">
+    <div>
+      <p class="text-sm text-[#60697b] leading-relaxed mb-6">
+        {company.shortSummary}
+      </p>
+
+      <!-- Key Services List -->
+      <div class="mb-6">
+        <h4 class="text-xs uppercase font-bold text-[#18355f] tracking-wider mb-3">
+          Core Capabilities:
+        </h4>
+        <ul class="space-y-2">
+          {company.keyServices.slice(0, 3).map((service) => (
+            <li class="flex items-center text-xs text-[#60697b]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#5ba646] mr-2.5 shrink-0"></span>
+              <span>{service}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Metrics & Profile Link -->
+    <div class="pt-5 border-t border-[#edf0f2] flex items-center justify-between">
+      <div>
+        <span class="block font-bold text-2xl text-[#18355f]">
+          {company.metrics[0].value}
+        </span>
+        <span class="block text-[11px] text-[#959ca9] uppercase font-medium">
+          {company.metrics[0].label}
+        </span>
+      </div>
+
+      <a
+        href={`/companies/${company.slug}`}
+        class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#18355f] group-hover:text-[#5ba646] transition-colors"
+      >
+        <span>View Profile</span>
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

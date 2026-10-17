@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import { projects } from '../../data/projects';
+import { sectors } from '../../data/sectors';
+
+const allSectors = ['All', ...sectors.map((s) => s.title)];
+---
+
+<Layout
+  title="Projects Portfolio | Signature Developments"
+  description="Explore Urbanspire Group's portfolio of commercial skyscrapers, prime residential communities, deep infrastructure, and luxury hospitality landmarks."
+>
+  <!-- Page Banner -->
+  <PageBanner
+    title="Architectural Legacies in Concrete and Steel"
+    subtitle="From supertall commercial headquarters to deepwater maritime cruise terminals, our portfolio demonstrates the structural prowess and craftsmanship of Urbanspire Group."
+    breadcrumb="Projects"
+  />
+
+  <!-- Projects Gallery Section -->
+  <section class="py-16 md:py-24 bg-[#f6f7f9]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Demo Disclaimer per AGENTS.md -->
+      <div class="mb-10 bg-white border border-[#e4e7eb] rounded-md p-4 flex items-center justify-between text-xs text-[#60697b] shadow-sm">
+        <div class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#5ba646] shrink-0"></span>
+          <span>
+            <strong>Portfolio Notice:</strong> Projects listed below are concept case studies demonstrating the technical capabilities, scale, and sector expertise of our operating companies.
+          </span>
+        </div>
+      </div>
+
+      <!-- Filter Buttons Strip (Matching ASGC clean pill styling) -->
+      <div class="flex flex-wrap items-center gap-2 mb-12" id="filter-container">
+        {allSectors.map((sectorName, idx) => (
+          <button
+            type="button"
+            data-filter={sectorName}
+            class={`filter-btn px-5 py-2 rounded-full text-xs uppercase font-medium tracking-wider transition-all shadow-sm ${
+              idx === 0
+                ? 'bg-[#5ba646] text-white font-semibold'
+                : 'bg-white text-[#343f52] hover:text-[#5ba646] border border-[#e4e7eb]'
+            }`}
+          >
+            {sectorName}
+          </button>
+        ))}
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+        {projects.map((project) => (
+          <div class="project-item" data-sector={project.sector}>
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-item');
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialSector = urlParams.get('sector');
+
+  const applyFilter = (filter: string) => {
+    buttons.forEach((btn) => {
+      const btnFilter = btn.getAttribute('data-filter');
+      if (btnFilter === filter) {
+        btn.classList.add('bg-[#5ba646]', 'text-white', 'font-semibold');
+        btn.classList.remove('bg-white', 'text-[#343f52]', 'border');
+      } else {
+        btn.classList.remove('bg-[#5ba646]', 'text-white', 'font-semibold');
+        btn.classList.add('bg-white', 'text-[#343f52]', 'border');
+      }
+    });
+
+    projectItems.forEach((item) => {
+      const itemSector = item.getAttribute('data-sector');
+      if (filter === 'All' || itemSector === filter) {
+        (item as HTMLElement).style.display = 'block';
+      } else {
+        (item as HTMLElement).style.display = 'none';
+      }
+    });
+  };
+
+  if (initialSector) {
+    applyFilter(initialSector);
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter') || 'All';
+      applyFilter(filter);
+    });
+  });
+</script>

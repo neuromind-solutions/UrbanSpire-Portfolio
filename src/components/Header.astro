@@ -1,0 +1,214 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  {
+    name: 'About Us',
+    href: '/about',
+    submenu: [
+      { name: 'Urbanspire in Brief', href: '/about' },
+      { name: 'Group Heritage', href: '/about#heritage' },
+      { name: 'Vision & Values', href: '/about#vision' },
+      { name: 'Quality & HSE Standards', href: '/about#standards' },
+    ]
+  },
+  {
+    name: 'Our Companies',
+    href: '/companies',
+    submenu: [
+      { name: 'Urbanspire Construction, Pune', href: '/companies/urbanspire-construction-pune' },
+      { name: 'Urbanspire Marine, Mumbai', href: '/companies/urbanspire-marine-mumbai' },
+      { name: 'Urbanspire Global Service, Dubai', href: '/companies/urbanspire-global-service-dubai' },
+    ]
+  },
+  {
+    name: 'Projects',
+    href: '/projects',
+  },
+  {
+    name: 'Services',
+    href: '/services',
+  },
+  {
+    name: 'How We Work',
+    href: '/about#how-we-work',
+    submenu: [
+      { name: 'Quality Governance', href: '/services#quality' },
+      { name: 'QHSE Safety & Zero Harm', href: '/about#safety' },
+      { name: 'BIM & Digital Technology', href: '/services#bim' },
+    ]
+  },
+  {
+    name: 'Sustainability',
+    href: '/about#sustainability',
+  },
+  {
+    name: 'Contact',
+    href: '/contact',
+  },
+];
+
+const isActive = (href: string) => {
+  if (href === '/' && currentPath === '/') return true;
+  if (href !== '/' && currentPath.startsWith(href.split('#')[0]) && href.split('#')[0] !== '/') return true;
+  return false;
+};
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
+  <nav
+    class="navbar navbar-expand-lg center-nav asch-hd nav-solid px-4 md:px-8 w-full flex items-center justify-between"
+    id="site-header"
+  >
+    <div class="max-w-7xl mx-auto w-full flex items-center justify-between py-3">
+      
+      <!-- Brand Logo: Official Urbanspire Group Logo -->
+      <div class="navbar-brand">
+        <a href="/" class="flex items-center group">
+          <img
+            src="/images/logo-transparent.png"
+            alt="Urbanspire Group"
+            class="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="eager"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation Menu -->
+      <div class="hidden lg:flex items-center space-x-1">
+        <ul class="navbar-nav flex items-center flex-row space-x-1">
+          {navItems.map((item) => (
+            <li class="nav-item relative group">
+              <a
+                href={item.href}
+                class={`nav-link text-sm px-3.5 py-4 font-normal flex items-center gap-1 transition-colors ${
+                  isActive(item.href)
+                    ? 'text-[#5ba646] font-medium'
+                    : 'text-[#343f52] hover:text-[#5ba646]'
+                }`}
+              >
+                <span>{item.name}</span>
+                {item.submenu && (
+                  <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </a>
+
+              <!-- Dropdown Menu -->
+              {item.submenu && (
+                <ul class="dropdown-menu absolute top-full left-0 hidden group-hover:block bg-white shadow-xl rounded-sm py-2 min-w-[230px] border border-gray-100 animate-fadeIn z-50">
+                  {item.submenu.map((sub) => (
+                    <li>
+                      <a
+                        href={sub.href}
+                        class="dropdown-item block px-4 py-2 text-xs font-normal text-[#343f52] hover:text-[#5ba646] hover:bg-gray-50 transition-colors"
+                      >
+                        {sub.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="navbar-other flex items-center space-x-4">
+        <a
+          href="/contact"
+          class="hidden sm:inline-flex items-center justify-center px-5 py-2 text-xs uppercase font-medium rounded-full transition-colors tracking-wider text-white bg-[#5ba646] hover:bg-[#18355f] shadow-sm"
+        >
+          <span>Get in Touch</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button
+          type="button"
+          id="navbar-hamburger-btn"
+          class="lg:hidden p-2 focus:outline-none text-[#18355f] hover:text-[#5ba646] transition-colors"
+          aria-label="Toggle Navigation"
+        >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Slideout Menu -->
+    <div
+      id="mobile-drawer"
+      class="fixed inset-y-0 left-0 w-72 bg-[#18355f] text-white p-6 transform -translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto lg:hidden shadow-2xl"
+    >
+      <div class="flex items-center justify-between pb-6 border-b border-white/20 mb-6">
+        <div class="flex items-center">
+          <img
+            src="/images/logo-white.png"
+            alt="Urbanspire Group"
+            class="h-9 w-auto object-contain"
+          />
+        </div>
+        <button type="button" id="mobile-close-btn" class="text-white hover:text-[#5ba646] text-2xl" aria-label="Close menu">
+          ✕
+        </button>
+      </div>
+
+      <ul class="space-y-4 text-sm font-medium">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="block py-1 hover:text-[#5ba646] transition-colors">
+              {item.name}
+            </a>
+            {item.submenu && (
+              <ul class="pl-4 mt-2 space-y-2 border-l border-white/20 text-xs text-white/80">
+                {item.submenu.map((sub) => (
+                  <li>
+                    <a href={sub.href} class="block py-0.5 hover:text-[#5ba646] transition-colors">
+                      {sub.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-8 pt-6 border-t border-white/20">
+        <a
+          href="/contact"
+          class="w-full inline-block text-center py-2.5 px-4 bg-[#5ba646] hover:bg-white hover:text-[#18355f] text-white text-xs font-semibold uppercase tracking-wider rounded-full transition-colors"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const hamburger = document.getElementById('navbar-hamburger-btn');
+  const drawer = document.getElementById('mobile-drawer');
+  const closeBtn = document.getElementById('mobile-close-btn');
+
+  if (hamburger && drawer && closeBtn) {
+    hamburger.addEventListener('click', () => {
+      drawer.classList.remove('-translate-x-full');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      drawer.classList.add('-translate-x-full');
+    });
+
+    // Close drawer on overlay click
+    document.addEventListener('click', (e) => {
+      if (!drawer.contains(e.target as Node) && !hamburger.contains(e.target as Node)) {
+        drawer.classList.add('-translate-x-full');
+      }
+    });
+  }
+</script>

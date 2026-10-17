@@ -1,0 +1,101 @@
+---
+const featureRows = [
+  {
+    title: 'Sustainable Construction Materials',
+    subtitle: 'Low-carbon geopolymer concrete and circular aggregates',
+    bgColor: 'bg-primary',
+    iconType: 'materials'
+  },
+  {
+    title: 'Reducing & Reusing Resources',
+    subtitle: 'On-site resource recovery and water recycling closed loops',
+    bgColor: 'bg-secondary',
+    iconType: 'recycle'
+  },
+  {
+    title: 'Smart Buildings & Digital Solutions',
+    subtitle: 'BIM Level 3 twins and automated energy monitoring',
+    bgColor: 'bg-primary',
+    iconType: 'smart'
+  },
+  {
+    title: 'Minimizing Construction Waste',
+    subtitle: '90%+ site waste diversion targeting Net Zero goals',
+    bgColor: 'bg-secondary',
+    iconType: 'waste'
+  }
+];
+---
+
+<section class="wrapper py-12 md:py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- Left (7 Cols): Curved Featured Banner (Matching fncybx-s2 with 150px 10px radius) -->
+      <div class="lg:col-span-7">
+        <div class="fncybx-s2">
+          <figure>
+            <img
+              src="/images/sustainability-bg.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
+          </figure>
+          
+          <div class="sustain-content">
+            <h4 class="tp-ttls mb-4">
+              <span>Sustainability</span>
+            </h4>
+            <h2 class="sb-ttls mb-6">
+              Urbanspire's<br />
+              approach to<br />
+              sustainability
+            </h2>
+            <a href="/about#sustainability" class="btn btn-primary btn-sm rounded-pill btn-styl2 group">
+              <span>Read More</span>
+              <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right (5 Cols): 4 Core Feature Rows (Matching icntsc-s) -->
+      <div class="lg:col-span-5 lg:pl-6">
+        {featureRows.map((row) => (
+          <div class="icntsc-s group">
+            <div class={`${row.bgColor} icn-sc`}>
+              {row.iconType === 'materials' && (
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              )}
+              {row.iconType === 'recycle' && (
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              )}
+              {row.iconType === 'smart' && (
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              )}
+              {row.iconType === 'waste' && (
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              )}
+            </div>
+            <div>
+              <h4 class="text-base sm:text-lg font-bold text-[#18355f] group-hover:text-[#5ba646] transition-colors">{row.title}</h4>
+              <p class="text-sm text-slate-600 mt-1 leading-relaxed font-normal">{row.subtitle}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>

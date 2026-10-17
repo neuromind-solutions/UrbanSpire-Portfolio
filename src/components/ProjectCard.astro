@@ -1,0 +1,86 @@
+---
+import type { Project } from '../types';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="group bg-white border border-[#e4e7eb] hover:border-[#5ba646] rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+  <!-- Image Container -->
+  <div class="relative h-64 overflow-hidden">
+    <img
+      src={project.heroImage}
+      alt={project.title}
+      class="w-full h-full object-cover group-hover:scale-106 transition-transform duration-600"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+    
+    <!-- Top Tags -->
+    <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
+      <span class="bg-[#5ba646] text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+        {project.sector}
+      </span>
+      {project.isNewlyAwarded && (
+        <span class="bg-[#18355f] text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+          Newly Awarded
+        </span>
+      )}
+      {project.isDemo && !project.isNewlyAwarded && (
+        <span class="bg-black/60 backdrop-blur-sm text-white/80 text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded">
+          Demo Concept
+        </span>
+      )}
+    </div>
+
+    <!-- Title on Image Base -->
+    <div class="absolute bottom-3.5 left-4 right-4">
+      <span class="text-xs text-white/70 uppercase tracking-wider block font-medium mb-1">
+        {project.companyName}
+      </span>
+      <h3 class="font-bold text-xl text-white group-hover:text-[#5ba646] transition-colors leading-snug">
+        <a href={`/projects/${project.slug}`}>
+          {project.title}
+        </a>
+      </h3>
+    </div>
+  </div>
+
+  <!-- Body Content -->
+  <div class="p-6 flex-grow flex flex-col justify-between bg-white">
+    <p class="text-xs text-[#60697b] leading-relaxed mb-6 line-clamp-2">
+      {project.summary}
+    </p>
+
+    <!-- Project Metrics Grid -->
+    {project.stats && project.stats.length > 0 && (
+      <div class="grid grid-cols-2 gap-2 py-3 border-y border-[#edf0f2] mb-5 text-xs">
+        {project.stats.slice(0, 2).map((stat) => (
+          <div>
+            <span class="text-[10px] uppercase text-[#959ca9] block font-medium">{stat.label}</span>
+            <span class="text-[#18355f] font-bold text-sm">{stat.value}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- Bottom Actions -->
+    <div class="pt-2 flex items-center justify-between">
+      <span class="text-xs text-[#959ca9]">
+        Delivered: {project.year}
+      </span>
+      <a
+        href={`/projects/${project.slug}`}
+        class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#18355f] group-hover:text-[#5ba646] transition-colors"
+      >
+        <span>Case Study</span>
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

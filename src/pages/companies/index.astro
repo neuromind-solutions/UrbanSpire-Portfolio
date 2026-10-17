@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CompanyCard from '../../components/CompanyCard.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import { companies } from '../../data/companies';
+---
+
+<Layout
+  title="Our 3 Companies | Operating Subsidiaries"
+  description="Explore the three operating companies under Urbanspire Group: Urbanspire Construction Pvt Ltd (Pune), Urbanspire Marine Pvt Ltd (Mumbai), and Urbanspire Global Service (Dubai)."
+>
+  <!-- Page Banner -->
+  <PageBanner
+    title="Specialized Depth. Unified Delivery."
+    subtitle="Urbanspire Group operates through three focused corporate entities. Each subsidiary is dedicated to a distinct engineering domain while operating under cohesive group standards and shared excellence."
+    breadcrumb="Our Companies"
+  />
+
+  <!-- Subsidiary Showcase Section -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- 3 Companies Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {companies.map((company) => (
+          <CompanyCard company={company} />
+        ))}
+      </div>
+
+      <!-- Cross-Subsidiary Capabilities Matrix Table -->
+      <div class="mt-20 pt-16 border-t border-[#e2e4e8]">
+        <h2 class="sb-ttls text-2xl sm:text-3xl mb-8">
+          Cross-Subsidiary Capabilities Matrix
+        </h2>
+
+        <div class="overflow-x-auto bg-[#f6f7f9] rounded-lg p-6 border border-[#e2e4e8]">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-[#dcdfe5] text-xs uppercase font-semibold text-[#18355f]">
+                <th class="py-3.5 px-4">Specialization Area</th>
+                <th class="py-3.5 px-4">Construction (Pune)</th>
+                <th class="py-3.5 px-4">Marine (Mumbai)</th>
+                <th class="py-3.5 px-4">Global Service (Dubai)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#e2e4e8] text-xs text-[#60697b]">
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">Turnkey Commercial & Industrial EPC</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+                <td class="py-3.5 px-4 text-[#959ca9]">—</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Coordinated</td>
+              </tr>
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">Port Terminals & Offshore Piling</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Structural Partner</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+                <td class="py-3.5 px-4 text-[#959ca9]">—</td>
+              </tr>
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">Coastal Protection & Marine Seawalls</td>
+                <td class="py-3.5 px-4 text-[#959ca9]">—</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+                <td class="py-3.5 px-4 text-[#959ca9]">—</td>
+              </tr>
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">High-Rise Concrete & Steel Frameworks</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Foundation Partner</td>
+                <td class="py-3.5 px-4 text-[#60697b]">BIM Partner</td>
+              </tr>
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">BIM Level 3 Cloud & Digital Twins</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Integrated</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Integrated</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+              </tr>
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">Smart MEP Engineering & BMS Automation</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Execution Partner</td>
+                <td class="py-3.5 px-4 text-[#959ca9]">—</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+              </tr>
+              <tr class="hover:bg-white transition-colors">
+                <td class="py-3.5 px-4 font-semibold text-[#18355f]">Global Procurement & PMO Advisory</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Regional Lead</td>
+                <td class="py-3.5 px-4 text-[#60697b]">Regional Lead</td>
+                <td class="py-3.5 px-4 text-[#5ba646] font-bold">● Primary Lead</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

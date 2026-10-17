@@ -1,0 +1,191 @@
+---
+const slides = [
+  {
+    title: 'Leading construction conglomerate',
+    subtitle: 'operating across prime regional sectors for three decades.',
+    project: 'The Vertex Innovation Tower',
+    link: '/about',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-modern-city-skyscrapers-and-buildings-42668-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85',
+  },
+  {
+    title: 'Driven by teamwork and integrity',
+    subtitle: 'utilizing the specialized expertise of our three operating companies.',
+    project: 'Azure Horizon Enclave',
+    link: '/companies',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-engineers-discussing-over-a-blueprint-41279-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2000&q=85',
+  },
+  {
+    title: 'Building for tomorrow',
+    subtitle: 'by adopting advanced BIM technology and sustainable construction solutions.',
+    project: 'Grand Coastal Cruise Terminal',
+    link: '/services',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-11-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1468375741313-9c9c807f4973?auto=format&fit=crop&w=2000&q=85',
+  },
+  {
+    title: 'Delivering enduring value',
+    subtitle: 'providing clients unmatched expertise in civil engineering, procurement, and fit-outs.',
+    project: 'Aura Luxury Wellness Resort',
+    link: '/projects',
+    video: 'https://assets.mixkit.co/videos/preview/mixkit-construction-worker-on-a-building-site-22-large.mp4',
+    poster: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=85',
+  }
+];
+
+const totalSlides = slides.length;
+---
+
+<section class="bnrscxs relative overflow-hidden" aria-label="Hero slideshow">
+  <div class="hm-crslc-wrapper">
+    <div class="hm-crslc-sw relative">
+      
+      <!-- Video Slides Container -->
+      <div class="insblsx relative w-full bg-black" id="hero-container">
+        
+        {slides.map((slide, idx) => (
+          <div
+            class={`hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out ${idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+            data-index={idx}
+          >
+            <!-- Background Video with poster fallback -->
+            <video
+              playsinline
+              autoplay={idx === 0}
+              muted
+              loop
+              preload={idx === 0 ? 'auto' : 'none'}
+              poster={slide.poster}
+              class="absolute inset-0 w-full h-full object-cover"
+              data-slide-video
+            >
+              <source src={slide.video} type="video/mp4" />
+              <!-- Poster fallback for when video can't play -->
+            </video>
+
+            <!-- Poster image fallback (always visible until video plays) -->
+            <img
+              src={slide.poster}
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 w-full h-full object-cover -z-10"
+              loading={idx === 0 ? 'eager' : 'lazy'}
+            />
+
+            <!-- Gradient Scrim for Legibility -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10 pointer-events-none"></div>
+
+            <!-- Slide Content (left-aligned like ASGC: left 9%, vertically centered) -->
+            <div class="cntsc-sld z-20">
+              <h2 class="text-white font-normal text-3xl sm:text-4xl lg:text-[42px] leading-tight mb-3">
+                {slide.title}
+              </h2>
+              <p class="text-white/90 text-base sm:text-lg font-light leading-relaxed mb-6 max-w-md">
+                {slide.subtitle}
+              </p>
+              <div>
+                <a href={slide.link} class="sld-btn">
+                  Read more
+                </a>
+              </div>
+            </div>
+
+          </div>
+        ))}
+
+        <!-- Shared Bottom Right: Project Callout & Counter & Arrow (single element, not per-slide) -->
+        <div class="nmsx z-30 flex items-center" id="hero-bottom-info">
+          <div class="lftsx">
+            <h3 class="prcnms text-white font-medium text-sm sm:text-base" id="hero-project-name">
+              {slides[0].project}
+            </h3>
+          </div>
+          <div class="cntrbx">
+            <span class="text-white font-bold" id="hero-current-num">1</span>/{totalSlides}
+          </div>
+          <button
+            type="button"
+            class="hero-next-btn"
+            id="hero-next-btn"
+            aria-label="Next Slide"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const slideData = [
+    { project: 'The Vertex Innovation Tower', link: '/about' },
+    { project: 'Azure Horizon Enclave', link: '/companies' },
+    { project: 'Grand Coastal Cruise Terminal', link: '/services' },
+    { project: 'Aura Luxury Wellness Resort', link: '/projects' },
+  ];
+
+  const slideEls = document.querySelectorAll<HTMLElement>('.hero-slide');
+  const videoEls = document.querySelectorAll<HTMLVideoElement>('[data-slide-video]');
+  const nextBtn = document.getElementById('hero-next-btn');
+  const projectName = document.getElementById('hero-project-name');
+  const currentNum = document.getElementById('hero-current-num');
+
+  let currentIdx = 0;
+  let autoAdvance: ReturnType<typeof setInterval>;
+
+  function goToSlide(index: number) {
+    const prev = currentIdx;
+    currentIdx = ((index % slideEls.length) + slideEls.length) % slideEls.length;
+
+    // Hide previous
+    slideEls[prev].classList.remove('opacity-100', 'z-10');
+    slideEls[prev].classList.add('opacity-0', 'z-0', 'pointer-events-none');
+    // Pause previous video
+    videoEls[prev]?.pause();
+
+    // Show new
+    slideEls[currentIdx].classList.remove('opacity-0', 'z-0', 'pointer-events-none');
+    slideEls[currentIdx].classList.add('opacity-100', 'z-10');
+    // Play new video (load first if not yet loaded)
+    const vid = videoEls[currentIdx];
+    if (vid) {
+      if (vid.readyState < 2) {
+        vid.load();
+      }
+      vid.play().catch(() => {/* autoplay blocked — poster is fallback */});
+    }
+
+    // Update UI
+    if (projectName) projectName.textContent = slideData[currentIdx].project;
+    if (currentNum) currentNum.textContent = String(currentIdx + 1);
+  }
+
+  function resetAutoAdvance() {
+    clearInterval(autoAdvance);
+    autoAdvance = setInterval(() => goToSlide(currentIdx + 1), 8000);
+  }
+
+  nextBtn?.addEventListener('click', () => {
+    goToSlide(currentIdx + 1);
+    resetAutoAdvance();
+  });
+
+  // Auto-advance
+  autoAdvance = setInterval(() => goToSlide(currentIdx + 1), 8000);
+
+  // Reduced motion: disable video autoplay
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    videoEls.forEach(v => { v.pause(); });
+    clearInterval(autoAdvance);
+  }
+
+  // Play first slide video
+  videoEls[0]?.play().catch(() => {/* poster fallback */});
+</script>

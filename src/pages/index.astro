@@ -1,0 +1,397 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroVideo from '../components/HeroVideo.astro';
+import SectorCard from '../components/SectorCard.astro';
+import CompanyCard from '../components/CompanyCard.astro';
+import PillarsSection from '../components/PillarsSection.astro';
+import { sectors } from '../data/sectors';
+import { companies } from '../data/companies';
+import { projects } from '../data/projects';
+
+const newlyAwardedProject = projects.find((p) => p.isNewlyAwarded) || projects[0];
+const otherProjects = projects.filter((p) => p.isFeatured).slice(0, 2);
+---
+
+<Layout
+  title="Leading Construction & Engineering Group"
+  description="Urbanspire Group is a leading general contracting conglomerate delivering signature architectural, civil, and commercial landmarks."
+>
+  <!-- 1. Fullscreen Hero Video Carousel -->
+  <HeroVideo />
+
+  <span class="anchor" id="sec2"></span>
+
+  <!-- 2. Corporate Overview & Metrics Section -->
+  <section class="wrapper pt-16 md:pt-20 pb-8 bg-white abthsc relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        
+        <!-- Left: Corporate Video Thumbnail -->
+        <div class="lg:col-span-6 relative">
+          <div class="abt-scsf">
+            <a
+              href="https://assets.mixkit.co/videos/preview/mixkit-engineers-discussing-over-a-blueprint-41279-large.mp4"
+              target="_blank"
+              class="btn-prjct-slcs"
+              aria-label="Watch Corporate Video"
+            >
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </a>
+            
+            <img
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
+              alt="Urbanspire structural engineering construction site"
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+            
+            <h4>Urbanspire Group — Construction Excellence</h4>
+          </div>
+        </div>
+
+        <!-- Right: Overview & Counter Strip -->
+        <div class="lg:col-span-6 lg:pl-4">
+          <div class="ab-dtlsc">
+            <h4 class="tp-ttls mb-4">
+              <span>About The Group</span>
+            </h4>
+
+            <h2 class="sb-ttls mb-6">
+              Industry leader in providing complete construction solutions
+            </h2>
+
+            <p class="text-sm text-[#60697b] leading-relaxed mb-8">
+              Urbanspire Group is an integrated general contracting conglomerate operating through three specialized companies — delivering every phase from deep civil engineering and structural frameworks to architectural fit-outs and smart MEP systems.
+            </p>
+
+            <div class="grid grid-cols-2 gap-8 mb-8" id="stats-counter-grid">
+              <div class="counter-wrapper">
+                <h3 class="counter">
+                  <span class="stat-number" data-target="12000" data-format="integer">0</span><span>+</span>
+                </h3>
+                <p>Specialist Workforce</p>
+              </div>
+              <div class="counter-wrapper">
+                <h3 class="counter">
+                  <span class="stat-number" data-target="300" data-format="integer">0</span><span>+</span>
+                </h3>
+                <p>Delivered Projects</p>
+              </div>
+              <div class="counter-wrapper">
+                <h3 class="counter">
+                  <span class="stat-number" data-target="1.8" data-format="decimal" data-decimals="1">0</span><span>M m²</span>
+                </h3>
+                <p>Delivered Floor Area</p>
+              </div>
+              <div class="counter-wrapper">
+                <h3 class="counter">
+                  <span class="stat-number" data-target="18" data-format="integer">0</span><span>+</span>
+                </h3>
+                <p>Years of Excellence</p>
+              </div>
+            </div>
+
+            <!-- Profile Download Pill Button -->
+            <a
+              target="_blank"
+              href="/Urbanspire-Group-Profile.pdf"
+              class="prf-btn-s"
+            >
+              <span>Download Profile</span>
+              <svg version="1.1" viewBox="0 0 50 50" xml:space="preserve">
+                <g>
+                  <path class="st0" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M44.6,48.78l-18.47-5.54c-0.64-0.19-1.32-0.19-1.96,0L5.39,48.8C3.2,49.45,1,47.81,1,45.52v-34.9c0-1.51,1-2.85,2.45-3.28L24.17,1.2c0.64-0.19,1.32-0.19,1.96,0l20.44,6.13C48.01,7.77,49,9.1,49,10.61v34.89C49,47.8,46.79,49.44,44.6,48.78z" />
+                  <line class="st0" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="25" y1="1.2" x2="25" y2="42.96" />
+                  <line class="st0" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="19.78" y1="11.92" x2="6.44" y2="15.79" />
+                  <line class="st0" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="19.78" y1="22.15" x2="6.44" y2="26.03" />
+                  <line class="st0" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="30.44" y1="33.18" x2="43.78" y2="37.06" />
+                  <polygon class="st0" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="30.44,22.46 44.01,26.11 44.01,15.57 30.44,11.92" />
+                </g>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sectors Header Bar -->
+      <div class="mt-20 md:mt-28 mb-8">
+        <div class="mb-3">
+          <h4 class="tp-ttls lns-c">
+            <span>Sectors</span>
+          </h4>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <h2 class="sb-ttls">
+              Our portfolio across<br />
+              various sectors
+            </h2>
+          </div>
+          <div class="pb-1">
+            <a
+              href="/projects"
+              class="inline-flex items-center gap-2 text-xs uppercase font-semibold tracking-wider text-[#18355f] hover:text-[#5ba646] transition-colors"
+            >
+              <span>Explore All</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Sectors Showcase Grid -->
+  <section class="wrapper pb-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {sectors.map((sector) => (
+          <SectorCard sector={sector} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Group Structure: The Three Companies (Urbanspire Triad) -->
+  <section class="wrapper py-16 md:py-24 bg-[#f6f7f9] border-t border-[#e2e4e8]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <h4 class="tp-ttls lns-c">
+          <span>Operating Companies</span>
+        </h4>
+        <h2 class="sb-ttls mt-3">
+          Three specialized subsidiaries under one vision
+        </h2>
+        <p class="text-sm text-[#60697b] max-w-2xl mt-3">
+          Urbanspire Group unites civil building construction in Pune, specialized maritime civil works in Mumbai, and global project consulting and smart MEP engineering from Dubai.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {companies.map((company) => (
+          <CompanyCard company={company} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Sustainability Feature Section -->
+  <PillarsSection />
+
+  <!-- 6. Newly Awarded Projects & Latest News -->
+  <section class="wrapper bg-[#f6f7f9] py-16 md:py-20 border-t border-[#e2e4e8]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- Left (8 Cols): Newly Awarded Projects -->
+        <div class="lg:col-span-8">
+          <div class="mb-6">
+            <h4 class="tp-ttls">
+              <span>Featured Work</span>
+            </h4>
+            <h2 class="sb-ttls">
+              Newly awarded<br />
+              projects
+            </h2>
+          </div>
+
+          <div class="fnc-nwpr-aw">
+            <figure>
+              <img
+                src={newlyAwardedProject.heroImage}
+                alt={newlyAwardedProject.title}
+                loading="lazy"
+              />
+            </figure>
+            <div class="tx-s-desc">
+              <h5>Sector: {newlyAwardedProject.sector}</h5>
+              <h3>{newlyAwardedProject.title}</h3>
+            </div>
+            <a class="aslnk-ws" href={`/projects/${newlyAwardedProject.slug}`}>
+              {newlyAwardedProject.title}
+            </a>
+          </div>
+
+          <!-- Secondary Newly Awarded Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+            {otherProjects.map((proj) => (
+              <div class="fnc-nwpr-aw h-[220px]">
+                <figure>
+                  <img src={proj.heroImage} alt={proj.title} loading="lazy" />
+                </figure>
+                <div class="tx-s-desc">
+                  <h5 class="text-xs">Sector: {proj.sector}</h5>
+                  <h3 class="text-lg">{proj.title}</h3>
+                </div>
+                <a class="aslnk-ws" href={`/projects/${proj.slug}`}>
+                  {proj.title}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right (4 Cols): Latest News -->
+        <div class="lg:col-span-4 lg:pl-4 pt-2">
+          <h2 class="sb-ttls">Latest news</h2>
+          <hr class="bt-lne" />
+
+          <div class="nws-glr-s">
+            <div class="cn-ngs">
+              <span class="post-date">
+                <svg class="w-4 h-4 text-[#5ba646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>February 10, 2026</span>
+              </span>
+              <h3>Urbanspire announces successful structural completion of The Vertex Tower</h3>
+              <a class="aslnk-ws-detail" href="/about">
+                <span>Details</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="cn-ngs">
+              <span class="post-date">
+                <svg class="w-4 h-4 text-[#5ba646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>December 18, 2025</span>
+              </span>
+              <h3>Urbanspire HSE Department achieves 4.2 Million Safe Man-Hours benchmark</h3>
+              <a class="aslnk-ws-detail" href="/about">
+                <span>Details</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="cn-ngs">
+              <span class="post-date">
+                <svg class="w-4 h-4 text-[#5ba646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>October 04, 2025</span>
+              </span>
+              <h3>Urbanspire subsidiary signs turnkey EPC contract for Coastal Maritime Terminal</h3>
+              <a class="aslnk-ws-detail" href="/about">
+                <span>Details</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="cn-ngs">
+              <span class="post-date">
+                <svg class="w-4 h-4 text-[#5ba646]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>August 22, 2025</span>
+              </span>
+              <h3>Urbanspire Fit-Out division completes landmark hospitality project for global hotel brand</h3>
+              <a class="aslnk-ws-detail" href="/about">
+                <span>Details</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function initCounters() {
+    const counterGrid = document.getElementById('stats-counter-grid');
+    if (!counterGrid) return;
+
+    const statElements = counterGrid.querySelectorAll<HTMLElement>('.stat-number');
+    if (!statElements.length) return;
+
+    let hasAnimated = false;
+
+    function runAnimation() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      const duration = 2000; // 2 seconds for a natural, smooth count-up
+
+      statElements.forEach((el) => {
+        const target = parseFloat(el.getAttribute('data-target') || '0');
+        const isDecimal = el.getAttribute('data-format') === 'decimal';
+        const decimals = parseInt(el.getAttribute('data-decimals') || '1', 10);
+        let startTime: number | null = null;
+
+        function animate(now: number) {
+          if (!startTime) startTime = now;
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // easeOutCubic: rapid dynamic start, gentle graceful deceleration to target
+          const ease = 1 - Math.pow(1 - progress, 3);
+          const current = ease * target;
+
+          if (isDecimal) {
+            el.textContent = current.toFixed(decimals);
+          } else {
+            el.textContent = Math.floor(current).toLocaleString('en-US');
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            // Guarantee precise final value
+            if (isDecimal) {
+              el.textContent = target.toFixed(decimals);
+            } else {
+              el.textContent = target.toLocaleString('en-US');
+            }
+          }
+        }
+
+        requestAnimationFrame(animate);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              runAnimation();
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.25,
+          rootMargin: '0px 0px -40px 0px',
+        }
+      );
+      observer.observe(counterGrid);
+    } else {
+      runAnimation();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCounters);
+  } else {
+    initCounters();
+  }
+  document.addEventListener('astro:page-load', initCounters);
+</script>

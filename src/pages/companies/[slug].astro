@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PageBanner from '../../components/PageBanner.astro';
+import { companies } from '../../data/companies';
+import { projects } from '../../data/projects';
+import type { Company } from '../../types';
+
+export function getStaticPaths() {
+  return companies.map((company) => ({
+    params: { slug: company.slug },
+    props: { company },
+  }));
+}
+
+interface Props {
+  company: Company;
+}
+
+const { company } = Astro.props;
+const relatedProjects = projects.filter((p) => p.companyId === company.id);
+---
+
+<Layout
+  title={`${company.name} | Subsidiary Profile`}
+  description={company.shortSummary}
+  image={company.heroImage}
+>
+  <!-- Page Banner with company image background -->
+  <PageBanner
+    title={company.name}
+    subtitle={company.shortSummary}
+    breadcrumb={company.name}
+    parentBreadcrumb="Subsidiaries"
+    parentHref="/companies"
+    bgImage={company.heroImage}
+  />
+
+  <!-- Subsidiary Deep Dive Section -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left: Narrative & Capabilities -->
+        <div class="lg:col-span-8">
+          <div class="mb-10">
+            <h2 class="sb-ttls text-2xl sm:text-3xl mb-4">
+              Operational Scope & Engineering Mandate
+            </h2>
+            <p class="text-base text-[#60697b] leading-relaxed">
+              {company.description}
+            </p>
+          </div>
+
+          <!-- Primary Capabilities -->
+          <div class="mb-12">
+            <h3 class="text-lg font-bold text-[#18355f] mb-4">
+              Primary Field Capabilities
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {company.keyServices.map((service) => (
+                <div class="bg-[#f6f7f9] border border-[#e2e4e8] rounded-md p-4 flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full bg-[#5ba646] shrink-0 mt-1.5"></span>
+                  <span class="text-sm font-medium text-[#343f52]">{service}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Executed Projects by Subsidiary -->
+          {relatedProjects.length > 0 && (
+            <div>
+              <div class="flex items-center justify-between mb-8 pb-3 border-b border-[#e2e4e8]">
+                <h3 class="text-xl font-bold text-[#18355f]">
+                  Projects Executed by {company.name}
+                </h3>
+                <span class="text-xs text-[#959ca9]">
+                  {relatedProjects.length} Case Studies
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {relatedProjects.map((project) => (
+                  <ProjectCard project={project} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Right: Benchmarks & Contact Sidebar -->
+        <div class="lg:col-span-4 space-y-6">
+          
+          <!-- Benchmarks Box -->
+          <div class="bg-[#f6f7f9] border border-[#e2e4e8] rounded-lg p-6">
+            <h4 class="text-xs uppercase font-bold text-[#18355f] tracking-wider mb-6 pb-2 border-b border-[#e2e4e8]">
+              Subsidiary Benchmarks
+            </h4>
+            <div class="space-y-6 divide-y divide-[#e2e4e8]">
+              {company.metrics.map((metric, idx) => (
+                <div class={idx !== 0 ? 'pt-4' : ''}>
+                  <span class="block font-bold text-3xl text-[#5ba646]">
+                    {metric.value}
+                  </span>
+                  <span class="text-xs font-medium text-[#343f52] uppercase tracking-wide">
+                    {metric.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Group Integration Box -->
+          <div class="bg-[#18355f] text-white rounded-lg p-6 text-xs leading-relaxed">
+            <span class="font-bold text-sm block mb-2 text-white">Group Integration</span>
+            <p class="text-white/80 mb-4">
+              This entity operates with dedicated field crews while leveraging Urbanspire Group’s centralized digital twin BIM labs, heavy plant fleets, and safety governance.
+            </p>
+            <a
+              href="/contact"
+              class="text-[#5ba646] hover:text-white font-semibold inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Request Technical Specs</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

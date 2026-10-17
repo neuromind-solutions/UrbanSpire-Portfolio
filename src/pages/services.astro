@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageBanner from '../components/PageBanner.astro';
+import { services } from '../data/services';
+---
+
+<Layout
+  title="Group Services & Disciplines | Multi-Disciplinary Delivery"
+  description="Discover Urbanspire Group's comprehensive construction disciplines spanning heavy civil engineering, turnkey EPC contracting, smart MEP, and digital BIM."
+>
+  <!-- Page Banner -->
+  <PageBanner
+    title="Full Lifecycle Construction Delivery"
+    subtitle="From deep geotechnical foundation engineering to turnkey smart skyscraper handovers, Urbanspire Group executes every discipline with in-house technical leadership."
+    breadcrumb="Services"
+  />
+
+  <!-- Services Grid Section -->
+  <section class="py-16 md:py-24 bg-[#f6f7f9]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service) => (
+          <div class="bg-white border border-[#e4e7eb] hover:border-[#5ba646] rounded-lg p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- Category and Icon Tag -->
+              <div class="flex items-center justify-between mb-5">
+                <span class="text-xs uppercase font-bold text-[#5ba646] tracking-wider">
+                  {service.category}
+                </span>
+                <div class="w-9 h-9 rounded-full bg-[#f6f7f9] flex items-center justify-center text-[#18355f] group-hover:bg-[#5ba646] group-hover:text-white transition-colors">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Title & Summary -->
+              <h3 class="font-bold text-xl text-[#18355f] mb-3 group-hover:text-[#5ba646] transition-colors leading-snug">
+                {service.title}
+              </h3>
+              <p class="text-xs text-[#60697b] leading-relaxed mb-6">
+                {service.description}
+              </p>
+
+              <!-- Features List -->
+              <div class="space-y-2 mb-8">
+                {service.features.map((feature) => (
+                  <div class="flex items-center text-xs text-[#343f52]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#5ba646] mr-2.5 shrink-0"></span>
+                    <span>{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Bottom Affiliated Subsidiary Tag -->
+            <div class="pt-4 border-t border-[#edf0f2] flex items-center justify-between text-xs">
+              <span class="text-[#959ca9] font-medium">
+                {service.affiliatedCompany}
+              </span>
+              <a
+                href="/contact"
+                class="text-[#18355f] group-hover:text-[#5ba646] font-semibold inline-flex items-center gap-1 transition-colors"
+              >
+                <span>Consult</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pre-Construction Consultation Banner -->
+  <section class="py-16 bg-white border-t border-[#e2e4e8] text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="sb-ttls text-3xl mb-3">
+        Custom Engineering & Procurement Consultation
+      </h2>
+      <p class="text-sm text-[#60697b] mb-8 leading-relaxed">
+        Our estimators, structural engineers, and BIM specialists are available for pre-construction value engineering and feasibility reviews.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center px-8 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#5ba646] hover:bg-[#18355f] rounded-full transition-colors"
+      >
+        <span>Request Pre-Construction Assessment</span>
+      </a>
+    </div>
+  </section>
+</Layout>
